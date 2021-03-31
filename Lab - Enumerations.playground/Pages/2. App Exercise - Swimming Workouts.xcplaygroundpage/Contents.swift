@@ -8,14 +8,36 @@
 struct SwimmingWorkout{
     var distance: Double
     var time: Double
-    var stroke: String
+    var stroke: Stroke
+    static var freestyleWorkouts: [SwimmingWorkout] = []
+    static var butterflyWorkouts: [SwimmingWorkout] = []
+    static var backstrokeWorkouts: [SwimmingWorkout] = []
+    static var breaststrokeWorkouts: [SwimmingWorkout] = []
+    enum Stroke{
+        case freestyle, butterfly, backstroke, breaststroke
+    }
+    func save(){
+        switch stroke{
+        case .freestyle:
+        SwimmingWorkout.freestyleWorkouts.append(self)
+        case .butterfly:
+             SwimmingWorkout.butterflyWorkouts.append(self)
+        case .backstroke:
+             SwimmingWorkout.backstrokeWorkouts.append(self)
+        case .breaststroke:
+            SwimmingWorkout.breaststrokeWorkouts.append(self)
+        }
+    }
 }
 
 /*:
  Allowing `stroke` to be of type `String` isn't very type-safe. Inside the `SwimmingWorkout` struct, create an enum called `Stroke` that has cases for `freestyle`, `butterfly`, `backstroke`, and `breaststroke`. Change the type of `stroke` from `String` to `Stroke`. Create two instances of `SwimmingWorkout` objects.
  */
-
-
+var Haru = SwimmingWorkout(distance: 20.0, time: 7.0, stroke: .freestyle)
+var Rei =  SwimmingWorkout(distance: 20.0, time: 23.0, stroke: .butterfly)
+Haru.save()
+Rei.save()
+print(SwimmingWorkout.freestyleWorkouts)
 /*:
  Now imagine you want to log swimming workouts separately based on the swimming stroke. You might use arrays as static variables on `SwimmingWorkout` for this. Add four static variables, `freestyleWorkouts`, `butterflyWorkouts`, `backstrokeWorkouts`, and `breaststrokeWorkouts`, to `SwimmingWorkout` above. Each should be of type `[SwimmingWorkout]` and should default to empty arrays.
  */
